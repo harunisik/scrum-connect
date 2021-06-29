@@ -1,0 +1,11 @@
+{% extends  layout %}
+{% block  content %}
+  <h1>Application Complete </h1>
+  {% if errorMessage %}
+    <p>Something went wrong. Try again later.</p>
+    <p>Error: {{errorMessage}}</p>
+  {% else %}
+    <p><strong>{{name}}</strong> Thank you for applying to this useful government service.<p/>
+  {% endif %}
+  <a href="/">Go back<a/>
+{% endblock %}

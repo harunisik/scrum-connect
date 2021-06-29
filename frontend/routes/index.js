@@ -3,30 +3,46 @@ const axios = require('axios');
 
 var router = express.Router();
 
-const getAllUserdata = () => {};
-
 router
   .get('/', async function (req, res, next) {
-    axios
-      .get('http://localhost:8080/api/userdata')
-      .then(({ data }) => {
-        console.log(data);
+    let userdataList = [];
+    let errorMessage = null;
 
-        let pageData = {
-          layout: 'layout.njk',
-          message: 'Hello world!',
-          title: 'Nunjucks example',
-          ...data,
-        };
+    try {
+      const { data } = await axios.get('http://localhost:8080/api/userdata');
+      userdataList = data.userdataList;
+    } catch (error) {
+      errorMessage = error.message;
+    }
 
-        res.render('index.njk', pageData);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    let pageData = {
+      layout: 'layout.njk',
+      title: 'Government Service',
+      userdataList,
+      errorMessage,
+    };
+
+    res.render('index.njk', pageData);
   })
-  .post('/', async function (req, res, next) {
-    console.log(req.body);
+  .post('/formResult', async function (req, res, next) {
+    const { name } = req.body;
+    let errorMessage = null;
+
+    try {
+      const { data } = await axios.post('http://localhost:8080/api/userdata', req.body);
+      console.log(data);
+    } catch (error) {
+      errorMessage = error.message;
+    }
+
+    let pageData = {
+      layout: 'layout.njk',
+      title: 'Application Result',
+      name,
+      errorMessage,
+    };
+
+    res.render('formResult.njk', pageData);
   });
 
 module.exports = router;

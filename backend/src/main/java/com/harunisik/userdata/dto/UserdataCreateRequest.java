@@ -1,6 +1,6 @@
 package com.harunisik.userdata.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,16 +16,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserdataCreateRequest {
 
-    @NotNull
+    @NotEmpty
     private String name;
 
-    @NotNull
+    @NotEmpty
     private String sex;
 
-    @NotNull
+    @NotEmpty
     private String age;
 
-    @NotNull
+    @NotEmpty
     private String country;
 
 }

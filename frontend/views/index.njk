@@ -1,8 +1,8 @@
 {% extends  layout %}
 {% block  content %}
-  <h1>{{message}}</h1>
+  <h1>Some Useful Government Service</h1>
 
-  <form action="/" method="POST">
+  <form action="/formResult" method="POST">
     <input type="text" name="name" placeholder="Name" />
     <input type="text" name="age" placeholder="Age" />
     <input type="text" name="sex" placeholder="Sex" />
@@ -32,9 +32,13 @@
         <td>{{item.dateCreated}}</td>
       </tr>
     {% else %}
-      <tr>
-        <td colspan="6">No data.</td>
-      </tr>
+        <tr>
+          {% if errorMessage %}
+            <td>Something went wrong. Data couldn't load. Error: {{errorMessage}}</td>
+          {% else %}
+            <td colspan="6">No data.</td>
+          {% endif %}
+        </tr>
     {% endfor %}
   </tbody>
 </table>
